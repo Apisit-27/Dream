@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เราอยู่ด้วยกันมานานแค่ไหนแล้ว?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #ffc0cb, #fff);
+            color: #333;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+        #timer {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: pink;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>เราคบกันมานานแค่ไหนแล้วน้า</h2>
+        <img src="couple.jpg" alt="Profile" class="profile-img">
+        <h3 id="years-count">Loading...</h3>
+        <div id="timer">Loading...</div>
+        <button class="back-btn" onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        function calculateTime() {
+            let startDate = new Date("2017-08-14T00:00:00"); // เปลี่ยนเป็น 14 สิงหาคม 2017
+            let now = new Date();
+            let diff = now - startDate;
+
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            let minutes = Math.floor((diff / (1000 * 60)) % 60);
+            let seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById("years-count").innerHTML = `${years} ปี ${months} เดือน ❤️`;
+            document.getElementById("timer").innerHTML = 
+                `${days} วัน : ${hours} ชั่วโมง : ${minutes} นาที : ${seconds} วินาที`;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        setInterval(calculateTime, 1000);
+        calculateTime();
+    </script>
+
+</body>
+</html>
